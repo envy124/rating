@@ -44,7 +44,7 @@ class Room:
         self.players.append(player)
 
 
-def get_reward_points_count(player, room):
+def get_reward_points(player, room):
     foes = [x for x in room.players if x.team_id != player.team_id]
     teammates = [x for x in room.players if x.team_id == player.team_id]
 
@@ -67,7 +67,7 @@ def main():
     room = Room()
     room.add_player(Player(0, STATE_VICTORY, 1))
     room.add_player(Player(9, STATE_LOOSE, 2))
-    print(get_reward_points_count(room.players[0], room))
+    print(get_reward_points(room.players[0], room))
 
 
 main()
