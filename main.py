@@ -48,7 +48,7 @@ def get_reward_points_count(player, room):
     foes = [x for x in room.players if x.team_id != player.team_id]
     teammates = [x for x in room.players if x.team_id == player.team_id]
 
-    if len(foes) == 0 and len(teammates) == 0:
+    if len(foes) == 0 or len(teammates) == 0:
         return 0
 
     foes_rank = sum([x.rank_index for x in foes]) / len(foes)
