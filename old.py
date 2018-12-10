@@ -41,8 +41,12 @@ def get_score(w, l):
 
 
 class RatingTestCase(unittest.TestCase):
-    def test_rating_reward_points(self):
-        pass
+    def test_1x1_equal(self):
+        w = {'id1': 1}
+        l = [{'id2': 1}]
+        result = get_score(w, l)
+        self.assertEqual(result['W']['id1'], 10)
+        self.assertEqual(result['L']['id2'], 10)
 
 
 # Test 1            // 1 vs 1
@@ -98,3 +102,5 @@ w = {'id1': 1, 'id2': 5}
 l = [{'id3': 10, 'id4': 8}]
 print('Test 8: 2 vs 2 (пастух, оруженосец vs король, герцог)')
 get_score(w, l)
+
+unittest.main()
