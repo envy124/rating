@@ -81,11 +81,15 @@ class RatingTestCase(unittest.TestCase):
         self.assertEqual(result['L']['id3'], 10)
         self.assertEqual(result['L']['id4'], 10)
 
-# Test 4            // 2 vs 1
-w = {'id1': 1, 'id4': 1}
-l = [{'id2': 1}]
-print('Test 4: 2 vs 1 ')
-get_score(w, l)
+    def test_2x3_equal(self):
+        w = {'id1': 1, 'id2': 1}
+        l = [{'id3': 1, 'id4': 1, 'id5': 1}]
+        result = get_score(w, l)
+        self.assertEqual(result['W']['id1'], 15)
+        self.assertEqual(result['W']['id2'], 15)
+        self.assertEqual(result['L']['id3'], 10)
+        self.assertEqual(result['L']['id4'], 10)
+        self.assertEqual(result['L']['id5'], 10)
 
 # Test 5            // 2 vs 2
 w = {'id1': 1, 'id4': 1}
