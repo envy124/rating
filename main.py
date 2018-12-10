@@ -12,6 +12,9 @@ SCORE_TABLE = [
     5, -32,	5, -16,	5, -8,	5, -6,	5, -4,	5, -2,	5, -2,	5, -2,	5, -2
 ]
 
+LINE_LENGTH = 18
+ROW_LENGTH = int(len(SCORE_TABLE) / LINE_LENGTH)
+
 STATE_VICTORY = 2
 STATE_LOOSE = 1
 STATE_DISCONNECT = 5
@@ -58,11 +61,11 @@ def get_reward_points(player, room):
 
     if player.state == STATE_VICTORY:
         points = sum(
-            [SCORE_TABLE[(x.rank_index + player.rank_index * 9) * 2]
+            [SCORE_TABLE[(x.rank_index + player.rank_index * ROW_LENGTH) * 2]
              for x in room.players])
         return max(points, 5)
     else:
-        return SCORE_TABLE[(foes_rank * 9 + teammates_rank) * 2 + 1]
+        return SCORE_TABLE[(foes_rank * ROW_LENGTH + teammates_rank) * 2 + 1]
 
 
 def main():
