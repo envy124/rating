@@ -110,22 +110,14 @@ class RatingTestCase(unittest.TestCase):
         self.assertEqual(result['W']['id1'], 19)
         self.assertEqual(result['L']['id2'], 19)
 
-# Test 7            // 2 vs 3 vs 2
-w = {'id1': 1, 'id7': 1}
-l = [{'id2': 1, 'id3': 1}, {'id4': 1, 'id5': 1, 'id6': 1}]
-print('Test 7: 2 vs 3 vs 2')
-get_score(w, l)
+    def test_2x2_non_equal(self):
+        w = {'id1': 1, 'id2': 5}
+        l = [{'id3': 10, 'id4': 8}]
+        result = get_score(w, l)
+        self.assertEqual(result['W']['id1'], 18)
+        self.assertEqual(result['W']['id2'], 14)
+        self.assertEqual(result['L']['id3'], 17)
+        self.assertEqual(result['L']['id4'], 15)
 
-# Test 8            // 1 vs 1 (пастух vs король)
-w = {'id1': 1}
-l = [{'id2': 10}]
-print('Test 8: 1 vs 1 (пастух vs король)')
-get_score(w, l)
-
-# Test 8            // 2 vs 2 (пастух, виконт vs король, герцог)
-w = {'id1': 1, 'id2': 5}
-l = [{'id3': 10, 'id4': 8}]
-print('Test 8: 2 vs 2 (пастух, оруженосец vs король, герцог)')
-get_score(w, l)
 
 unittest.main()
