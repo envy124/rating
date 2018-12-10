@@ -35,8 +35,6 @@ def get_score(w, l):
                 a += 10 - (v - val)
             lose[key] = round(a / len(w))
 
-    print('W: ', win)
-    print('L: ', lose)
     return {'W': win, 'L': lose}
 
 
