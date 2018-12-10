@@ -103,11 +103,12 @@ class RatingTestCase(unittest.TestCase):
         self.assertEqual(result['L']['id6'], 10)
         self.assertEqual(result['L']['id7'], 10)
 
-# Test 6            // 2 vs 3
-w = {'id1': 1, 'id4': 1}
-l = [{'id2': 1, 'id3': 1, 'id5': 1}]
-print('Test 6: 2 vs 3 ')
-get_score(w, l)
+    def test_1x1_non_equal(self):
+        w = {'id1': 1}
+        l = [{'id2': 10}]
+        result = get_score(w, l)
+        self.assertEqual(result['W']['id1'], 19)
+        self.assertEqual(result['L']['id2'], 19)
 
 # Test 7            // 2 vs 3 vs 2
 w = {'id1': 1, 'id7': 1}
