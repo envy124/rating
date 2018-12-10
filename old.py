@@ -56,6 +56,14 @@ class RatingTestCase(unittest.TestCase):
         self.assertEqual(result['L']['id2'], 10)
         self.assertEqual(result['L']['id3'], 10)
 
+    def test_1x1x1_equal(self):
+        w = {'id1': 1}
+        l = [{'id2': 1}, {'id3': 1}]
+        result = get_score(w, l)
+        self.assertEqual(result['W']['id1'], 10)
+        self.assertEqual(result['L']['id2'], 10)
+        self.assertEqual(result['L']['id3'], 10)
+
 
 # Test 1            // 1 vs 1
 w = {'id1': 1}
