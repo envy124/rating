@@ -1,3 +1,5 @@
+import unittest
+
 SCORE_TABLE = [
     5, -2,	10, -2,	20, -2,	30, -2,	40, -2,	50, -2,	60, -2,	70, -2,	80, -2,
     5, -2,	5, -2,	10, -2,	20, -2,	30, -2,	40, -2,	50, -2,	60, -2,	70, -2,
@@ -70,4 +72,108 @@ def main():
     print(get_reward_points(room.players[0], room))
 
 
-main()
+class RatingTestCase(unittest.TestCase):
+    def test_1x1_equal(self):
+        room = Room()
+        room.add_player(Player(0, STATE_VICTORY, 1))
+        room.add_player(Player(0, STATE_LOOSE, 2))
+
+        self.assertEqual(get_reward_points(room.players[0], room), 10)
+        self.assertEqual(get_reward_points(room.players[1], room), 10)
+
+    def test_1x2_equal(self):
+        room = Room()
+        room.add_player(Player(0, STATE_VICTORY, 1))
+        room.add_player(Player(0, STATE_LOOSE, 2))
+        room.add_player(Player(0, STATE_LOOSE, 2))
+
+        self.assertEqual(get_reward_points(room.players[0], room), 20)
+        self.assertEqual(get_reward_points(room.players[1], room), 10)
+        self.assertEqual(get_reward_points(room.players[2], room), 10)
+
+    def test_1x1x1_equal(self):
+        room = Room()
+        room.add_player(Player(0, STATE_VICTORY, 1))
+        room.add_player(Player(0, STATE_LOOSE, 2))
+        room.add_player(Player(0, STATE_LOOSE, 3))
+
+        self.assertEqual(get_reward_points(room.players[0], room), 10)
+        self.assertEqual(get_reward_points(room.players[1], room), 10)
+        self.assertEqual(get_reward_points(room.players[2], room), 10)
+
+    def test_2x1_equal(self):
+        room = Room()
+        room.add_player(Player(0, STATE_VICTORY, 1))
+        room.add_player(Player(0, STATE_VICTORY, 1))
+        room.add_player(Player(0, STATE_LOOSE, 2))
+
+        self.assertEqual(get_reward_points(room.players[0], room), 5)
+        self.assertEqual(get_reward_points(room.players[1], room), 5)
+        self.assertEqual(get_reward_points(room.players[2], room), 10)
+
+    def test_2x2_equal(self):
+        room = Room()
+        room.add_player(Player(0, STATE_VICTORY, 1))
+        room.add_player(Player(0, STATE_VICTORY, 1))
+        room.add_player(Player(0, STATE_LOOSE, 2))
+        room.add_player(Player(0, STATE_LOOSE, 2))
+
+        self.assertEqual(get_reward_points(room.players[0], room), 10)
+        self.assertEqual(get_reward_points(room.players[1], room), 10)
+        self.assertEqual(get_reward_points(room.players[2], room), 10)
+        self.assertEqual(get_reward_points(room.players[3], room), 10)
+
+    def test_2x3_equal(self):
+        room = Room()
+        room.add_player(Player(0, STATE_VICTORY, 1))
+        room.add_player(Player(0, STATE_VICTORY, 1))
+        room.add_player(Player(0, STATE_LOOSE, 2))
+        room.add_player(Player(0, STATE_LOOSE, 2))
+        room.add_player(Player(0, STATE_LOOSE, 2))
+
+        self.assertEqual(get_reward_points(room.players[0], room), 15)
+        self.assertEqual(get_reward_points(room.players[1], room), 15)
+        self.assertEqual(get_reward_points(room.players[2], room), 10)
+        self.assertEqual(get_reward_points(room.players[3], room), 10)
+        self.assertEqual(get_reward_points(room.players[4], room), 10)
+
+    def test_2x3x2_equal(self):
+        room = Room()
+        room.add_player(Player(0, STATE_VICTORY, 1))
+        room.add_player(Player(0, STATE_VICTORY, 1))
+        room.add_player(Player(0, STATE_LOOSE, 2))
+        room.add_player(Player(0, STATE_LOOSE, 2))
+        room.add_player(Player(0, STATE_LOOSE, 3))
+        room.add_player(Player(0, STATE_LOOSE, 3))
+        room.add_player(Player(0, STATE_LOOSE, 3))
+
+        self.assertEqual(get_reward_points(room.players[0], room), 15)
+        self.assertEqual(get_reward_points(room.players[1], room), 15)
+        self.assertEqual(get_reward_points(room.players[2], room), 10)
+        self.assertEqual(get_reward_points(room.players[3], room), 10)
+        self.assertEqual(get_reward_points(room.players[4], room), 10)
+        self.assertEqual(get_reward_points(room.players[5], room), 10)
+        self.assertEqual(get_reward_points(room.players[6], room), 10)
+
+    def test_1x1_non_equal(self):
+        room = Room()
+        room.add_player(Player(0, STATE_VICTORY, 1))
+        room.add_player(Player(9, STATE_LOOSE, 2))
+
+        self.assertEqual(get_reward_points(room.players[0], room), 19)
+        self.assertEqual(get_reward_points(room.players[1], room), 19)
+
+    def test_2x2_non_equal(self):
+        room = Room()
+        room.add_player(Player(0, STATE_VICTORY, 1))
+        room.add_player(Player(4, STATE_VICTORY, 1))
+        room.add_player(Player(9, STATE_LOOSE, 2))
+        room.add_player(Player(7, STATE_LOOSE, 2))
+
+        self.assertEqual(get_reward_points(room.players[0], room), 18)
+        self.assertEqual(get_reward_points(room.players[1], room), 14)
+        self.assertEqual(get_reward_points(room.players[2], room), 17)
+        self.assertEqual(get_reward_points(room.players[3], room), 15)
+
+
+unittest.main()
