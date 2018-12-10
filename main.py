@@ -56,15 +56,15 @@ def get_reward_points(player, room):
     if len(foes) == 0 or len(teammates) == 0:
         return 0
 
-    foes_rank = sum([x.rank_index for x in foes]) / len(foes)
-    teammates_rank = sum([x.rank_index for x in teammates]) / len(teammates)
-
     if player.state == STATE_VICTORY:
         points = sum(
             [SCORE_TABLE[(x.rank_index + player.rank_index * ROW_LENGTH) * 2]
              for x in room.players])
         return max(points, 5)
     else:
+        teammates_rank = sum(
+            [x.rank_index for x in teammates]) / len(teammates)
+        foes_rank = sum([x.rank_index for x in foes]) / len(foes)
         return SCORE_TABLE[(foes_rank * ROW_LENGTH + teammates_rank) * 2 + 1]
 
 
