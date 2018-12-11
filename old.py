@@ -13,10 +13,10 @@ import unittest
 def get_score(w, l):
     win = {}
     lose = {}
-    for key, val in w.items():
+    for player_id, val in w.items():
         i = 0
         b = 0
-        win[key] = 0
+        win[player_id] = 0
         for i in l:
             a = 0
             for v in i.values():
@@ -24,9 +24,10 @@ def get_score(w, l):
             b = round(a / len(w))
 
             if len(l) > 1:
-                win[key] += abs(win[key] - b) if win[key] < b else 0
+                win[player_id] += abs(win[player_id] -
+                                      b) if win[player_id] < b else 0
             else:
-                win[key] += b
+                win[player_id] += b
 
     for i in l:
         for key, val in i.items():
