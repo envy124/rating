@@ -10,31 +10,31 @@ import unittest
 # Ранг пастуха начинается с 1, а не с 0 !
 
 
-def get_score(w, l):
+def get_score(win_team, loose_team):
     win = {}
     lose = {}
-    for player_id, val in w.items():
+    for player_id, val in win_team.items():
         i = 0
         b = 0
         win[player_id] = 0
-        for i in l:
+        for i in loose_team:
             a = 0
             for v in i.values():
                 a += 10 + (v - val)
-            b = round(a / len(w))
+            b = round(a / len(win_team))
 
-            if len(l) > 1:
+            if len(loose_team) > 1:
                 win[player_id] += abs(win[player_id] -
                                       b) if win[player_id] < b else 0
             else:
                 win[player_id] += b
 
-    for i in l:
+    for i in loose_team:
         for key, val in i.items():
             a = 0
-            for v in w.values():
+            for v in win_team.values():
                 a += 10 - (v - val)
-            lose[key] = round(a / len(w))
+            lose[key] = round(a / len(win_team))
 
     return {'W': win, 'L': lose}
 
