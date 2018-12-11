@@ -13,14 +13,14 @@ import unittest
 def get_score(win_team, loose_team):
     win = {}
     lose = {}
-    for player_id, val in win_team.items():
+    for player_id, player_rank in win_team.items():
         i = 0
         b = 0
         win[player_id] = 0
         for i in loose_team:
             a = 0
             for v in i.values():
-                a += 10 + (v - val)
+                a += 10 + (v - player_rank)
             b = round(a / len(win_team))
 
             if len(loose_team) > 1:
