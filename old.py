@@ -15,9 +15,9 @@ def get_score(win_team, loose_team_list):
     lose = {}
     for player_id, player_rank in win_team.items():
         win[player_id] = 0
-        for i in loose_team_list:
+        for loose_team in loose_team_list:
             a = 0
-            for v in i.values():
+            for v in loose_team.values():
                 a += 10 + (v - player_rank)
             b = round(a / len(win_team))
 
@@ -27,8 +27,8 @@ def get_score(win_team, loose_team_list):
             else:
                 win[player_id] += b
 
-    for i in loose_team_list:
-        for key, val in i.items():
+    for loose_team in loose_team_list:
+        for key, val in loose_team.items():
             a = 0
             for v in win_team.values():
                 a += 10 - (v - val)
