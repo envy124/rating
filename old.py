@@ -14,7 +14,6 @@ def get_score(win_team, loose_team):
     win = {}
     lose = {}
     for player_id, player_rank in win_team.items():
-        i = 0
         b = 0
         win[player_id] = 0
         for i in loose_team:
