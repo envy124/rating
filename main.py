@@ -32,6 +32,8 @@ RANKS = [
     'King',
 ]
 
+MAX_RANK = 10
+
 
 class Player:
     def __init__(self, rank_index, state, team_id):
