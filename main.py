@@ -1,4 +1,5 @@
 import unittest
+from collections import defaultdict
 
 SCORE_TABLE = [
     5, -2,	10, -2,	20, -2,	30, -2,	40, -2,	50, -2,	60, -2,	70, -2,	80, -2,
