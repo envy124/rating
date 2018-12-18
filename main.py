@@ -49,6 +49,12 @@ class Room:
         self.players.append(player)
 
 
+def group_players_by_team(players):
+    teams = defaultdict(list)
+    [teams[x.team_id].append(x) for x in players]
+    return [team for key, team in teams.items()]
+
+
 def get_reward_points(player, room):
     foes = [x for x in room.players if x.team_id != player.team_id]
     teammates = [x for x in room.players if x.team_id == player.team_id]
