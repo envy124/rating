@@ -9,6 +9,8 @@ import unittest
 # lose - словарь, содержащий id игрока и очки для списания из его статистики
 # Ранг пастуха начинается с 1, а не с 0 !
 
+MAX_RANK = 10
+
 
 def get_score(win_team, loose_team_list):
     win = {}
@@ -16,7 +18,7 @@ def get_score(win_team, loose_team_list):
     for player_id, player_rank in win_team.items():
         win[player_id] = 0
         for loose_team in loose_team_list:
-            points = round(sum([10 + (x - player_rank)
+            points = round(sum([MAX_RANK + (x - player_rank)
                                 for x in loose_team.values()]) / len(win_team))
 
             if len(loose_team_list) > 1:
@@ -27,7 +29,7 @@ def get_score(win_team, loose_team_list):
 
     for loose_team in loose_team_list:
         for player_id, player_rank in loose_team.items():
-            points = round(sum([10 - (x - player_rank)
+            points = round(sum([MAX_RANK - (x - player_rank)
                                 for x in win_team.values()]) / len(win_team))
             lose[player_id] = points
 
