@@ -60,21 +60,18 @@ def group_players_by_team(players):
 
 def get_reward_points(player, room):
     result = 0
-    foe_teams = group_players_by_team(
-        [x for x in room.players if x.team_id != player.team_id])
-    teammates = [x for x in room.players if x.team_id == player.team_id]
-
-    if len(foe_teams) == 0 or len(teammates) == 0:
-        return 0
+    loosed_teams = group_players_by_team(
+        [x for x in room.players if x.state != STATE_VICTORY])
+    winned_team = [x for x in room.players if x.state == STATE_VICTORY]
 
     if player.state == STATE_VICTORY:
-        for foe_team in foe_teams:
+        for team in loosed_teams:
             points = round(sum([MAX_RANK + (x.rank_index - player.rank_index)
-                                for x in foe_team]) / len(teammates))
+                                for x in team]) / len(winned_team))
             result += abs(result - points)
     else:
         result = round(sum([MAX_RANK - (x.rank_index - player.rank_index)
-                            for x in teammates]) / len(teammates))
+                            for x in winned_team]) / len(winned_team))
     return result
 
 
