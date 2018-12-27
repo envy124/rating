@@ -68,7 +68,7 @@ sub main {
         password       => '',
         host_id        => 1,
         players_count  => 2,
-        players        => @players,
+        players        => \@players,
     };
     get_score($players[0], $room);
 }
