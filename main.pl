@@ -13,19 +13,18 @@ sub group_by {
 sub get_score {
     my ($player, $room) = @_;
     my $result = 0;
-    my @loosed_teams = ();
+    my @loosed_players = ();
     my @winned_team = ();
 
     for my $x (values $room->{players}) {
         if  ($x->{state} eq $STATE_VICTORY) {
             push @winned_team, $x;
         } else {
-            # my $team = group_by(grep {$_->{team_id} eq x->{team_id}} $room->{players});
-            # print $team;
+            push @loosed_players, $x;
         }
     }
 
-    if ($player->{state} == STATE_VICTORY) {
+    if ($player->{state} == $STATE_VICTORY) {
         print 1;
     } else {
         print 2;
