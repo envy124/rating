@@ -1,13 +1,15 @@
 $STATE_VICTORY = 2;
 $STATE_LOOSE = 1;
 
-sub group_by {
-    my %grouped = @_;
-    for (@queries) {
-        my ($k,$v) = %$_;
-        push @{ $grouped{$k} }, $v;
+sub group_by_team {
+    my (@players) = @_;
+    my %grouped_hash = {};
+    for (@players) {
+        my $player = $_;
+        my $team_id = $_->{team_id};
+        push @{ $grouped_hash{$team_id} }, $player;
     }
-    return %grouped;
+    return %grouped_hash;
 }
 
 sub get_score {
@@ -23,6 +25,9 @@ sub get_score {
             push @loosed_players, $x;
         }
     }
+
+    my @foes = grep {$_->{team_id} ne $player->{team_id}} @loosed_players;
+    my $loosed_teams = group_by_team(@foes);
 
     if ($player->{state} == $STATE_VICTORY) {
         print 1;
