@@ -1,5 +1,11 @@
+use Math::Round;
+use List::Util qw(
+    reduce sum
+);
+
 $STATE_VICTORY = 2;
 $STATE_LOOSE = 1;
+$MAX_RANK = 10;
 
 sub group_by_team {
     my (@players) = @_;
@@ -27,15 +33,19 @@ sub get_score {
     }
 
     my @foes = grep {$_->{team_id} ne $player->{team_id}} @loosed_players;
-    my $loosed_teams = group_by_team(@foes);
+    my @loosed_teams = group_by_team(@foes);
+    for my $team (@loosed_teams) {
+        my $team_rating_sum = sum map {$MAX_RANK + ($_->{rank_index} - $player->{rank_index})} $team;
+        my $team_rating = round $team_rating_sum / length @winned_team;
+        $result += $team_rating;
+    }
 
     if ($player->{state} == $STATE_VICTORY) {
         print 1;
     } else {
         print 2;
     }
-
-    print $player;
+    return $score;
 }
 
 sub main {
