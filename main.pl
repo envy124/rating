@@ -9,13 +9,13 @@ $MAX_RANK = 10;
 
 sub group_by_team {
     my (@players) = @_;
-    my %grouped_hash = {};
+    my %grouped = {};
     for (@players) {
         my $player = $_;
         my $team_id = $_->{team_id};
-        push @{ $grouped_hash{$team_id} }, $player;
+        push @{ $grouped{$team_id} }, $player;
     }
-    return %grouped_hash;
+    return %grouped;
 }
 
 sub get_score {
